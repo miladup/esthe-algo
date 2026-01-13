@@ -35,7 +35,8 @@ Ces cercles peuvent être remplacés par des carrés en mettant ```ellipse(x + s
 2. Cliquer sur le canvas pour démarrer la musique et l’animation.
 3. Observer les cercles qui pulsant et changent de couleur au rythme de la musique.
 
-## Technologies
+## Technologies et aide utilisée
 
 - p5.js et p5.sound.js pour le dessin et l’analyse audio.
 - Développement inspiré du Jeu de la Vie de Conway, adapté pour un rendu musical et fluide.
+- ChatGPT : aide à la conception de l’automate cellulaire, à l’analyse audio (FFT) et à l’amélioration du rendu visuel et de la fluidité de l’animation.
