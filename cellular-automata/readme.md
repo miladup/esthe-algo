@@ -6,7 +6,7 @@ Ce projet est une visualisation musicale interactive réalisée en p5.js. Il com
 
 Les cellules sont représentées par des cercles pulsants dont la taille, la couleur et la transparence évoluent au rythme de la musique, offrant un effet féérique et immersif.
 
-Ces cercles peuvent être remplacés par des carrés en mettant ```ellipse(x + size/2, y + size/2, size, size);``` à la place de ```rect(x, y, size, size);``` dans sketch.js.
+Ces cercles peuvent être remplacés par des carrés en mettant ```rect(x, y, size, size);``` à la place de ```ellipse(x + size/2, y + size/2, size, size);``` dans sketch.js.
 
 ## Structure du projet
 ```
