@@ -8,6 +8,8 @@ Les cellules sont représentées par des cercles pulsants dont la taille, la cou
 
 Ces cercles peuvent être remplacés par des carrés en mettant ```rect(x, y, size, size);``` à la place de ```ellipse(x + size/2, y + size/2, size, size);``` dans sketch.js.
 
+Laissez la musique se boucler afin d’en observer pleinement les variations visuelles !
+
 ## Structure du projet
 ```
 ./index.html
