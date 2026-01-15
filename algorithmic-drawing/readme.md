@@ -24,7 +24,7 @@ Elle représente une grille de points animés à l’aide de la fonction noise. 
 
 ## Utilisation
 
-Pour exécuter ces fichiers, il suffit de copier-coller chaque code dans l’éditeur en ligne p5.js, puis de lancer l’exécution.
+Pour exécuter ces fichiers, il suffit de copier-coller chaque code dans l’éditeur en ligne p5.js (https://editor.p5js.org/), puis de lancer l’exécution.
 
 ## Outils et aide utilisée
 
