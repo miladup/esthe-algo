@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amour bizarre</title>
+<style>
+  body {
+    font-family: monospace;
+    padding: 3rem;
+  }
+</style>
+</head>
+<body>
+
+<div id="letter"></div>
+
+<script>
+/* vocabulaire */
+
+const openings = [
+  "Dear you,",
+  "Hello you,",
+  "I am writing to you,",
+  "I am not sure why, but"
+];
+
+const actions = [
+  "I think of you",
+  "I wait for you",
+  "I imagine you",
+  "I fail to forget you",
+  "I repeat your name"
+];
+
+const feelings = [
+  "confused",
+  "too intense",
+  "uncertain",
+  "persistent",
+  "strangely calm",
+  "uncomfortable"
+];
+
+const descriptions = [
+  "my almost-love",
+  "something familiar",
+  "a habit",
+  "too close",
+  "not enough",
+  "a mistake I enjoy"
+];
+
+const fragments = [
+  "Still.",
+  "Again.",
+  "Almost.",
+  "I hesitate.",
+  "This feeling.",
+  "Sorry."
+];
+
+const endings = [
+  "Yours, somehow.",
+  "Still yours.",
+  "From me. I think.",
+  "This is love. Probably."
+];
+
+/* outil */
+
+function pick(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+/* génération des phrases */
+
+function generateSentence() {
+  let r = Math.random();
+
+  if (r < 0.2) {
+    return pick(actions) + ".";
+  }
+  if (r < 0.4) {
+    return "I feel " + pick(feelings) + ".";
+  }
+  if (r < 0.6) {
+    return "You are " + pick(descriptions) + ".";
+  }
+  if (r < 0.8) {
+    return pick(fragments);
+  }
+  return pick(actions) + ", again.";
+}
+
+/* génération de la lettre */
+
+function generateLetter() {
+  let text = pick(openings) + "<br><br>";
+  let lines = Math.floor(Math.random() * 8) + 6;
+
+  for (let i = 0; i < lines; i++) {
+    text += generateSentence() + "<br>";
+  }
+
+  text += "<br>" + pick(endings);
+  return text;
+}
+
+/* boucle : nouvelle lettre qui apparait */
+
+function loopLetters() {
+  document.getElementById("letter").innerHTML = generateLetter();
+}
+
+loopLetters();
+setInterval(loopLetters, 9000);
+</script>
+
+</body>
+</html>

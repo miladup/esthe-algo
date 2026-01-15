@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Words</title>
+</head>
+<body>
+
+<div id="canvas" style="font-family: monospace; line-height: 10px;"></div>
+
+<script>
+const canvas = document.getElementById("canvas");
+
+// Mot à dessiner
+const word = "LOVE";
+
+// Mot à répéter dans le dessin (toujours "LOVE")
+const repeatedWord = "LOVE";
+
+// Représentation ASCII simplifiée des lettres
+const lettersMap = {
+  L: [
+    "L   ",
+    "L   ",
+    "L   ",
+    "L   ",
+    "LLLL"
+  ],
+  O: [
+    " OOO ",
+    "O   O",
+    "O   O",
+    "O   O",
+    " OOO "
+  ],
+  V: [
+    "V   V",
+    "V   V",
+    " V V ",
+    " V V ",
+    "  V  "
+  ],
+  E: [
+    "EEEEE",
+    "E    ",
+    "EEE  ",
+    "E    ",
+    "EEEEE"
+  ]
+};
+
+// Boucle sur chaque lettre
+letters = word.split("");
+letters.forEach(letter => {
+  const lines = lettersMap[letter];
+  lines.forEach(line => {
+    let newLine = "";
+    for (let char of line) {
+      if(char === " "){
+        newLine += "&nbsp;&nbsp;"; // espace
+      } else {
+        newLine += repeatedWord + " ";
+      }
+    }
+    canvas.innerHTML += newLine + "<br>";
+  });
+  canvas.innerHTML += "<br>"; // espace entre lettres
+});
+</script>
+
+</body>
+</html>
