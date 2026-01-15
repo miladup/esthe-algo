@@ -3,11 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Words</title>
+    <title>LOVE</title>
+    <style>
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: monospace;
+  }
+</style>
 </head>
 <body>
 
-<div id="canvas" style="font-family: monospace; line-height: 10px;"></div>
+<div id="canvas" style="font-family: monospace; line-height: 20px;"></div>
 
 <script>
 const canvas = document.getElementById("canvas");
@@ -25,28 +34,42 @@ const lettersMap = {
     "L   ",
     "L   ",
     "L   ",
-    "LLLL"
+    "L   ",
+    "L   ",
+    "L   ",
+    "LLL"
   ],
   O: [
-    " OOO ",
+    "OOO",
     "O   O",
     "O   O",
     "O   O",
-    " OOO "
+    "O   O",
+    "O   O",
+    "O   O",
+    "OOO"
   ],
   V: [
     "V   V",
     "V   V",
+    "V   V",
     " V V ",
     " V V ",
+    " V V ",
+    "  V  ",
+    "  V  ",
     "  V  "
   ],
   E: [
-    "EEEEE",
+    "EEE",
     "E    ",
-    "EEE  ",
     "E    ",
-    "EEEEE"
+    "E    ",
+    "EE  ",
+    "E    ",
+    "E    ",
+    "E    ",
+    "EEE"
   ]
 };
 
