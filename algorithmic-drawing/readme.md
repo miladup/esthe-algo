@@ -29,4 +29,4 @@ Pour exécuter ces fichiers, il suffit de copier-coller chaque code dans l’éd
 ## Outils et aide utilisée
 
 - p5.js pour le dessin algorithmique et l’animation : https://p5js.org/examples/repetition-noise/
-- ChatGPT : aide pour le choix des couleurs de la figure 1 et pour la conception de l’animation de la figure 3.
+- ChatGPT : aide pour les couleurs de la figure 1 et pour la conception de l’animation de la figure 3.
