@@ -1,95 +1,117 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LOVE</title>
-    <style>
+<meta charset="UTF-8">
+<title>FORM</title>
+<style>
   body {
+    margin: 0;
+    background: black;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    font-family: monospace;
+    height: 100vh;
+  }
+
+  svg {
+    width: 500px;
+  }
+
+  text {
+    fill: white;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    dominant-baseline: middle;
   }
 </style>
 </head>
 <body>
 
-<div id="canvas" style="font-family: monospace; line-height: 20px;"></div>
+<svg id="svg" viewBox="0 0 500 900"></svg>
 
 <script>
-const canvas = document.getElementById("canvas");
+const svg = document.getElementById("svg");
 
-// Mot à dessiner
-const word = "LOVE";
+const startY = 40;
+const lineHeight = 28;
+const totalLines = 30;
 
-// Mot à répéter dans le dessin (toujours "LOVE")
-const repeatedWord = "LOVE";
+// AXE CENTRAL
+const formX = 200;
 
-// Représentation ASCII simplifiée des lettres
-const lettersMap = {
-  L: [
-    "L   ",
-    "L   ",
-    "L   ",
-    "L   ",
-    "L   ",
-    "L   ",
-    "L   ",
-    "LLL"
-  ],
-  O: [
-    "OOO",
-    "O   O",
-    "O   O",
-    "O   O",
-    "O   O",
-    "O   O",
-    "O   O",
-    "OOO"
-  ],
-  V: [
-    "V   V",
-    "V   V",
-    "V   V",
-    " V V ",
-    " V V ",
-    " V V ",
-    "  V  ",
-    "  V  ",
-    "  V  "
-  ],
-  E: [
-    "EEE",
-    "E    ",
-    "E    ",
-    "E    ",
-    "EE  ",
-    "E    ",
-    "E    ",
-    "E    ",
-    "EEE"
-  ]
-};
+// Textes possibles
+const beforeTexts = [
+  "CREATING",
+  "SHAPING",
+  "BUILDING",
+  "TRANSFORMING",
+  "EXPLORING",
+  "OBSERVING",
+  "GENERATING",
+  "COMPOSING",
+  "",
+  ""
+];
 
-// Boucle sur chaque lettre
-letters = word.split("");
-letters.forEach(letter => {
-  const lines = lettersMap[letter];
-  lines.forEach(line => {
-    let newLine = "";
-    for (let char of line) {
-      if(char === " "){
-        newLine += "&nbsp;&nbsp;"; // espace
-      } else {
-        newLine += repeatedWord + " ";
-      }
-    }
-    canvas.innerHTML += newLine + "<br>";
-  });
-  canvas.innerHTML += "<br>"; // espace entre lettres
-});
+const afterTexts = [
+  "IN SPACE",
+  "IN MOTION",
+  "IN DESIGN",
+  "THROUGH TIME",
+  "OF TOUGHT",
+  "AND STRUCTURE",
+  "OF LIGHT",
+  "OF ENERGY",
+  "",
+  ""
+];
+
+let y = startY;
+
+for (let i = 0; i < totalLines; i++) {
+  const group = document.createElementNS("http://www.w3.org/2000/svg", "g");
+
+  // TEXTE AVANT (collé à FORM)
+  const before = beforeTexts[Math.floor(Math.random() * beforeTexts.length)];
+  if (before) {
+    const t = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    t.setAttribute("x", formX - 15);
+    t.setAttribute("y", y);
+    t.setAttribute("text-anchor", "end");
+    t.textContent = before;
+    group.appendChild(t);
+  }
+
+  // THE FORM (ancre)
+const form = document.createElementNS("http://www.w3.org/2000/svg", "text");
+form.setAttribute("x", formX);
+form.setAttribute("y", y);
+form.textContent = "FORM";
+group.appendChild(form);
+
+// TEXTE APRÈS (collé après THE FORM)
+const after = afterTexts[Math.floor(Math.random() * afterTexts.length)];
+if (after) {
+  const t = document.createElementNS("http://www.w3.org/2000/svg", "text");
+
+  // On ajoute temporairement le texte pour pouvoir mesurer sa largeur
+  t.textContent = after;
+  group.appendChild(t);
+
+  // Mesurer la largeur de "FORM"
+  const formWidth = form.getBBox().width;
+
+  // Placer le texte après "FORM" avec un petit espace
+  t.setAttribute("x", formX + formWidth + 68);
+  t.setAttribute("y", y);
+  t.setAttribute("text-anchor", "start");
+}
+
+  svg.appendChild(group);
+  y += lineHeight;
+}
 </script>
 
 </body>
