@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amour bizarre</title>
+    <title>Weird love</title>
 <style>
   body {
     font-family: monospace;
@@ -16,7 +16,7 @@
 <div id="letter"></div>
 
 <script>
-/* vocabulaire */
+// vocabulaire
 
 const openings = [
   "Dear you,",
@@ -67,13 +67,13 @@ const endings = [
   "This is love. Probably."
 ];
 
-/* outil */
+// outil de choix aléatoire
 
 function pick(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
-/* génération des phrases */
+// génération des phrases
 
 function generateSentence() {
   let r = Math.random();
@@ -93,7 +93,7 @@ function generateSentence() {
   return pick(actions) + ", again.";
 }
 
-/* génération de la lettre */
+// génération de la lettre
 
 function generateLetter() {
   let text = pick(openings) + "<br><br>";
@@ -107,7 +107,7 @@ function generateLetter() {
   return text;
 }
 
-/* boucle : nouvelle lettre qui apparait */
+// boucle : nouvelle lettre qui apparait
 
 function loopLetters() {
   document.getElementById("letter").innerHTML = generateLetter();
