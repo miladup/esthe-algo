@@ -42,3 +42,5 @@ Laissez la musique se boucler afin d’en observer pleinement les variations vis
 - p5.js et p5.sound.js pour le dessin et l’analyse audio.
 - Développement inspiré du Jeu de la Vie de Conway, adapté pour un rendu musical et fluide.
 - ChatGPT : aide à la conception de l’automate cellulaire, à l’analyse audio (FFT) et à l’amélioration du rendu visuel et de la fluidité de l’animation.
+
+PS : l'inspiration de base vient seulement de mon cerveau
