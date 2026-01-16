@@ -1,4 +1,4 @@
-# Litérature digitale
+# Litérature numérique
 
 ## Description
 
@@ -19,7 +19,7 @@ Affichage du mot "FORM" comme ancre centrale, entouré de mots aléatoires avant
 
 ## Utilisation
 
-Ouvrir les fichiers HTML dans un navigateur moderne.
+Ouvrir les fichiers HTML dans un navigateur.
 
 ## Outils
 
