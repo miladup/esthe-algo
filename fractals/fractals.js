@@ -1,10 +1,13 @@
+let angles = {};
+let speeds = {};
+
 // SETUP
 // Initialisation du canvas et du style graphique
 function setup() {
   createCanvas(1100, 280);      // Taille de la scène
   stroke(255);                 // Couleur des traits : BLANC
   strokeWeight(0.7);           // Épaisseur fine, style schéma
-  noFill();                    // Pas de remplissage (formes filaires)
+  noFill();                    // Pas de remplissage
 }
 
 // DRAW
@@ -19,20 +22,42 @@ function draw() {
   depth = constrain(depth, 0, maxDepth);
 
   // Appel des fractales (solides de Platon)
-  fractalTetra(110, 0, 55, depth);
-  fractalCube(330, 0, 55, depth);
-  fractalOcta(550, 0, 55, depth);
-  fractalIcosa(770, 0, 55, depth);   
-  fractalDodeca(990, 0, 55, depth);
+  fractalTetra(110, 0, 55, depth, "tetra");
+  fractalCube(330, 0, 55, depth, "cube");
+  fractalOcta(550, 0, 55, depth, "octa");
+  fractalIcosa(770, 0, 55, depth, "icosa");   
+  fractalDodeca(990, 0, 55, depth, "dodeca");
 }
 
-/* TÉTRAÈDRE */
-function fractalTetra(x, y, r, depth) {
+// Gestion de la rotation au survol de la souris
+function updateRotation(id, x, y, r) {
+  if (!(id in angles)) angles[id] = 0;
+  if (!(id in speeds)) speeds[id] = 0;
+
+  let correctedMouseY = mouseY - height / 2;
+  let d = dist(mouseX, correctedMouseY, x, y);
+
+  let targetSpeed = d < r ? 0.01 : 0;
+  speeds[id] = lerp(speeds[id], targetSpeed, 0.05);
+  angles[id] += speeds[id];
+}
+
+// TÉTRAÈDRE
+function fractalTetra(x, y, r, depth, id) {
+  updateRotation(id, x, y, r);
+
+  push();
+  translate(x, y);
+  rotate(angles[id]);
+
   // Dessin de la forme de base (triangle)
-  drawPolyAt(x, y, 3, r, -PI / 2);
+  drawPolyAt(0, 0, 3, r, -PI / 2);
 
   // Condition d'arrêt de la récursion
-  if (depth <= 0) return;
+  if (depth <= 0) {
+    pop();
+    return;
+  }
 
   // Facteur d'échelle pour les sous-formes
   let scale = 0.45;
@@ -41,24 +66,35 @@ function fractalTetra(x, y, r, depth) {
   for (let i = 0; i < 3; i++) {
     let a = TWO_PI / 3 * i - PI / 2;
     fractalTetra(
-      x + cos(a) * r,
-      y + sin(a) * r,
+      cos(a) * r,
+      sin(a) * r,
       r * scale,
-      depth - 1
+      depth - 1,
+      id
     );
   }
 
   // Répétition au centre
-  fractalTetra(x, y, r * scale, depth - 1);
+  fractalTetra(0, 0, r * scale, depth - 1, id);
+
+  pop();
 }
 
+// CUBE
+function fractalCube(x, y, r, depth, id) {
+  updateRotation(id, x, y, r);
 
-/* CUBE */
-function fractalCube(x, y, r, depth) {
+  push();
+  translate(x, y);
+  rotate(angles[id]);
+
   // Projection 2D du cube (carré incliné)
-  drawPolyAt(x, y, 4, r, PI / 4);
+  drawPolyAt(0, 0, 4, r, PI / 4);
 
-  if (depth <= 0) return;
+  if (depth <= 0) {
+    pop();
+    return;
+  }
 
   let scale = 0.5;
 
@@ -66,24 +102,36 @@ function fractalCube(x, y, r, depth) {
   for (let i = 0; i < 4; i++) {
     let a = TWO_PI / 4 * i + PI / 4;
     fractalCube(
-      x + cos(a) * r,
-      y + sin(a) * r,
+      cos(a) * r,
+      sin(a) * r,
       r * scale,
-      depth - 1
+      depth - 1,
+      id
     );
   }
 
   // Cube central
-  fractalCube(x, y, r * scale, depth - 1);
+  fractalCube(0, 0, r * scale, depth - 1, id);
+
+  pop();
 }
 
-/* OCTAÈDRE */
-function fractalOcta(x, y, r, depth) {
-  // Carré + diagonales (projection de l'octaèdre)
-  drawPolyAt(x, y, 4, r, PI / 4);
-  drawDiagonals(x, y, 4, r);
+// OCTAÈDRE
+function fractalOcta(x, y, r, depth, id) {
+  updateRotation(id, x, y, r);
 
-  if (depth <= 0) return;
+  push();
+  translate(x, y);
+  rotate(angles[id]);
+
+  // Carré + diagonales (projection de l'octaèdre)
+  drawPolyAt(0, 0, 4, r, PI / 4);
+  drawDiagonals(0, 0, 4, r);
+
+  if (depth <= 0) {
+    pop();
+    return;
+  }
 
   let scale = 0.45;
 
@@ -91,27 +139,39 @@ function fractalOcta(x, y, r, depth) {
   for (let i = 0; i < 4; i++) {
     let a = TWO_PI / 4 * i + PI / 4;
     fractalOcta(
-      x + cos(a) * r,
-      y + sin(a) * r,
+      cos(a) * r,
+      sin(a) * r,
       r * scale,
-      depth - 1
+      depth - 1,
+      id
     );
   }
 
   // Répétition centrale
-  fractalOcta(x, y, r * scale, depth - 1);
+  fractalOcta(0, 0, r * scale, depth - 1, id);
+
+  pop();
 }
 
-/* ICOSAÈDRE */
-function fractalIcosa(x, y, r, depth) {
+// ICOSAÈDRE
+function fractalIcosa(x, y, r, depth, id) {
+  updateRotation(id, x, y, r);
+
+  push();
+  translate(x, y);
+  rotate(angles[id]);
+
   // Pentagone + diagonales (structure interne)
-  drawPolyAt(x, y, 5, r, PI / 5);
-  drawDiagonals(x, y, 5, r);
+  drawPolyAt(0, 0, 5, r, PI / 5);
+  drawDiagonals(0, 0, 5, r);
 
   // Cercle structurel (projection sphérique)
-  ellipse(x, y, r * 1.6);
+  ellipse(0, 0, r * 1.6);
 
-  if (depth <= 0) return;
+  if (depth <= 0) {
+    pop();
+    return;
+  }
 
   let scale = 0.42;
 
@@ -119,26 +179,38 @@ function fractalIcosa(x, y, r, depth) {
   for (let i = 0; i < 5; i++) {
     let a = TWO_PI / 5 * i + PI / 5;
     fractalIcosa(
-      x + cos(a) * r,
-      y + sin(a) * r,
+      cos(a) * r,
+      sin(a) * r,
       r * scale,
-      depth - 1
+      depth - 1,
+      id
     );
   }
 
   // Icosaèdre central
-  fractalIcosa(x, y, r * scale, depth - 1);
+  fractalIcosa(0, 0, r * scale, depth - 1, id);
+
+  pop();
 }
 
-/* DODÉCAÈDRE */
-function fractalDodeca(x, y, r, depth) {
+// DODÉCAÈDRE
+function fractalDodeca(x, y, r, depth, id) {
+  updateRotation(id, x, y, r);
+
+  push();
+  translate(x, y);
+  rotate(angles[id]);
+
   // Décagone (projection du dodécaèdre)
-  drawPolyAt(x, y, 10, r, PI / 10);
+  drawPolyAt(0, 0, 10, r, PI / 10);
 
   // Cercle de structure externe
-  ellipse(x, y, r * 1.7);
+  ellipse(0, 0, r * 1.7);
 
-  if (depth <= 0) return;
+  if (depth <= 0) {
+    pop();
+    return;
+  }
 
   let scale = 0.5;
 
@@ -146,23 +218,25 @@ function fractalDodeca(x, y, r, depth) {
   for (let i = 0; i < 10; i++) {
     let a = TWO_PI / 10 * i + PI / 10;
     fractalDodeca(
-      x + cos(a) * r,
-      y + sin(a) * r,
+      cos(a) * r,
+      sin(a) * r,
       r * scale,
-      depth - 1
+      depth - 1,
+      id
     );
   }
 
   // Dodécaèdre central
-  fractalDodeca(x, y, r * scale, depth - 1);
+  fractalDodeca(0, 0, r * scale, depth - 1, id);
+
+  pop();
 }
 
-/* OUTILS */
+// OUTILS
 
 // Dessine un polygone régulier centré avec rotation
 function drawPolyAt(x, y, sides, r, rot) {
   push();
-  translate(x, y);
   rotate(rot);
   beginShape();
   for (let i = 0; i < sides; i++) {
@@ -181,8 +255,8 @@ function drawDiagonals(x, y, sides, r) {
   for (let i = 0; i < sides; i++) {
     let a = TWO_PI / sides * i;
     pts.push(createVector(
-      x + cos(a) * r,
-      y + sin(a) * r
+      cos(a) * r,
+      sin(a) * r
     ));
   }
 
