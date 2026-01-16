@@ -1,4 +1,4 @@
-# Litérature numérique
+# Littérature numérique
 
 ## Description
 
