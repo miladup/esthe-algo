@@ -1,0 +1,1 @@
+Mon projet préféré est l’automate cellulaire. J’ai particulièrement aimé y intégrer la musique et créer une harmonie entre le son, l’esthétique visuelle et les couleurs de l’automate. C’est le projet qui m’a le plus inspiré, celui que j’ai pris le plus de plaisir à réaliser, et selon moi, le plus abouti sur le plan esthétique.
